@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body>
+    <div class="page">
+        <header class="header">
+            <a href="#"><img src="./images/logo.svg" alt="логотип"></a>
+        </header>
+        <main class="content">
+            <section class="profile">
+                <div class="profile__info">
+                <img src="./images/Avatar.jpg" class="profile__image" alt="ж.кусто">
+                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <p class="profile__text">Исследователь океана</p>  
+                </div>
+                <button class="add__button"></button>
+            </section>
+            <section class="elements">
+                <ul class="list">
+                    <li class="list__description">
+                        <img src="./images/kch.jpg" class="list__image" alt="карачаевск">
+                        <p class="list__text"></p>
+                        <button type="button" class="list__button"></button>
+                    </li>
+                    <li class="list__description">
+                        <img src="./images/elbrus.jpg" class="list__image" alt="гора эльбрус">
+                        <p class="list__text"></p>
+                        <button type="button" class="list__button"></button>
+                    </li>
+                    <li class="list__description">
+                        <img src="./images/dombai.jpg" class="list__image" alt="домбай">
+                        <p class="list__text"></p>
+                        <button type="button" class="list__button"></button>
+                    </li>
+                    <li class="list__description">
+                        <img src="./images/elbrust.jpg" class="list__image" alt="гора эльбрус">
+                        <p class="list__text"></p>
+                        <button type="button" class="list__button"></button>
+                    </li>
+                    <li class="list__description">
+                        <img src="./images/dombait.jpg" class="list__image" alt="домбай">
+                        <p class="list__text"></p>
+                        <button type="button" class="list__button"></button>
+                    </li>
+                    <li class="list__description">
+                        <img src="./images/kcht.jpg" class="list__image" alt="карачаево-черкесская республика">
+                        <p class="list__text"></p>
+                        <button type="button" class="list__button"></button>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__signature">© 2020 Mesto Russia</p>
+        </footer>
+        <div class="popup">
+            <div class="popup__container">
+                <button class="preset-value">Заполнить данные</button>
+                <form class="form">
+                    <input type="text" class="form__input form__input_type_firstname" name="firstname"  placeholder="Имя" />
+                    <input type="text" class="form__input form__input_type_proffesion" name="proffesion" placeholder="Профессия" />
+                    <button type="submit" class="form__submit">загрузить картинку</button>
+                    <button type="button" class="form__close">закрыть форму</button>
+                </form>
+            </div>
+
+        </div>
+
+        <script src="./script.js"></script>
+    </div>
+</body>
+
+</html>
