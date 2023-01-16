@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 
-<body>
+<body class="general-color">
     <div class="page">
         <header class="header">
-            <a href="#"><img src="./images/logo.svg" alt="логотип"></a>
+            <a href="#"><img src="./images/logo.svg" class="header__logo" alt="логотип"></a>
         </header>
         <main class="content">
             <section class="profile">
@@ -21,7 +21,7 @@
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <p class="profile__text">Исследователь океана</p>  
                 </div>
-                <button class="add__button"></button>
+                <button class="profile__button"></button>
             </section>
             <section class="elements">
                 <ul class="list">
@@ -51,7 +51,7 @@
                         <button type="button" class="list__button"></button>
                     </li>
                     <li class="list__description">
-                        <img src="./images/kcht.jpg" class="list__image" alt="карачаево-черкесская республика">
+                        <img src="./images/kcht.jpg" class="list__image" alt="карачаево-черкессия">
                         <p class="list__text"></p>
                         <button type="button" class="list__button"></button>
                     </li>
@@ -61,8 +61,8 @@
         <footer class="footer">
             <p class="footer__signature">© 2020 Mesto Russia</p>
         </footer>
-        <div class="popup">
-            <div class="popup__container">
+        <div class="popup"> <!--полупрозрачный фон-->
+            <div class="popup__container popup__container_popup_opened"> <!--само окно popup-->
                 <button class="preset-value">Заполнить данные</button>
                 <form class="form">
                     <input type="text" class="form__input form__input_type_firstname" name="firstname"  placeholder="Имя" />
