@@ -1,0 +1,8 @@
+.header{
+    border-bottom: 1px solid #545454;
+    border-bottom: opacity 0.7;
+    max-width: 880px;
+    box-sizing: border-box;
+    margin-bottom: 34px;
+    border: dashed darkgoldenrod;
+}

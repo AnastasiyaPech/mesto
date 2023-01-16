@@ -1,0 +1,7 @@
+.profile {
+    display:flex;
+    border: dashed darkgoldenrod;
+    margin-bottom: 68px;
+    justify-content: space-between;
+    max-width: 880px;
+}
