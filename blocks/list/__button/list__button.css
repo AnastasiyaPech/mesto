@@ -1,3 +1,20 @@
 .list__button{
-    background: url("../../../images/addbutton.jpg");
+    width: 22px;
+    height: 19px;
+    background: url("../../../images/like.jpg");
+    box-sizing: border-box;
+    border: none;
+    background-repeat: no repeat;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.list__button:hover{
+    opacity: 0.5;
+}
+.list__button:active{
+    background: #000000;
 }

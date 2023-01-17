@@ -2,4 +2,6 @@
     display: flex;
     max-width: 880px;
     box-sizing: border-box;
+    margin: 0 auto;
+    margin-bottom: 67px;
 }

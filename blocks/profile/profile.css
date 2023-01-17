@@ -1,6 +1,6 @@
 .profile {
     display:flex;
-    border: dashed darkgoldenrod;
+    margin: 0 auto;
     margin-bottom: 68px;
     justify-content: space-between;
     max-width: 880px;

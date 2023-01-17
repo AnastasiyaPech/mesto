@@ -30,55 +30,65 @@
                 <ul class="list">
                     <li class="list__description">
                         <img src="./images/kch.jpg" class="list__image" alt="карачаевск">
-                        <p class="list__text">Карачаевск</p>
-                        <button type="button" class="list__button"></button>
+                        <div class="list__container">
+                            <p class="list__text">Карачаевск</p>
+                            <button type="button" class="list__button"></button>
+                        </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/elbrus.jpg" class="list__image" alt="гора эльбрус">
-                        <p class="list__text">Гора Эльбрус</p>
-                        <button type="button" class="list__button"></button>
+                        <div class="list__container">
+                            <p class="list__text">Гора Эльбрус</p>
+                            <button type="button" class="list__button"></button>
+                        </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/dombai.jpg" class="list__image" alt="домбай">
-                        <p class="list__text">Домбай</p>
-                        <button type="button" class="list__button"></button>
+                        <div class="list__container">
+                            <p class="list__text">Домбай</p>
+                            <button type="button" class="list__button"></button>
+                        </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/elbrust.jpg" class="list__image" alt="гора эльбрус">
-                        <p class="list__text">Гора Эльбрус</p>
-                        <button type="button" class="list__button"></button>
+                        <div class="list__container">
+                            <p class="list__text">Гора Эльбрус</p>
+                            <button type="button" class="list__button"></button>
+                        </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/dombait.jpg" class="list__image" alt="домбай">
-                        <p class="list__text">Домбай</p>
-                        <button type="button" class="list__button"></button>
+                        <div class="list__container">
+                            <p class="list__text">Домбай</p>
+                            <button type="button" class="list__button"></button>
+                        </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/kcht.jpg" class="list__image" alt="карачаево-черкессия">
-                        <p class="list__text">Карачаево-Черкессия</p>
-                        <button type="button" class="list__button"></button>
+                        <div class="list__container">
+                            <p class="list__text">Карачаево-Черкессия</p>
+                            <button type="button" class="list__button"></button>
+                        </div>
                     </li>
                 </ul>
             </section>
         </main>
         <footer class="footer">
-            <p class="footer__signature">© 2020 Mesto Russia</p>
+            <p class="footer__signature">&copy; 2020 Mesto Russia</p>
         </footer>
         <div class="popup"> <!--полупрозрачный фон-->
             <div class="popup__container popup__container_popup_opened"> <!--само окно popup-->
-                <button class="preset-value">Заполнить данные</button>
+                <button class="preset-value"></button>
+                <p class="popup__text">Редактировать профиль</p>
                 <form class="form">
                     <input type="text" class="form__input form__input_type_firstname" name="firstname"
                         placeholder="Имя" />
                     <input type="text" class="form__input form__input_type_proffesion" name="proffesion"
-                        placeholder="Профессия" />
-                    <button type="submit" class="form__submit">загрузить картинку</button>
-                    <button type="button" class="form__close">закрыть форму</button>
+                        placeholder="О себе" />
+                    <button type="submit" class="form__save">Сохранить</button>
                 </form>
             </div>
-
         </div>
-
         <script src="./script.js"></script>
     </div>
 </body>
