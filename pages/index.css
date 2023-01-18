@@ -30,4 +30,5 @@
 @import url(../blocks/popup/__form-input/_type/popup__form-input_type_proffesion.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__text/popup__text.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 
