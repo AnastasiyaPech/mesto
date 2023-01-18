@@ -77,15 +77,15 @@
             <p class="footer__signature">&copy; 2020 Mesto Russia</p>
         </footer>
         <div class="popup"> <!--полупрозрачный фон-->
-            <div class="popup__container popup__container_popup_opened"> <!--само окно popup-->
-                <button class=" preset-value"></button>
+            <div class="popup__container"> <!--само окно popup-->
+                <button class="popup__button-exit"></button>
                 <p class="popup__text">Редактировать профиль</p>
-                <form class="form">
-                    <input type="text" class="form__input form__input_type_firstname" name="firstname"
+                <form class="popup__form">
+                    <input type="text" class="popup__form-input popup__form-input_type_firstname" name="firstname"
                         placeholder="Имя" />
-                    <input type="text" class="form__input form__input_type_proffesion" name="proffesion"
+                    <input type="text" class="popup__form-input popup__form-input_type_proffesion" name="proffesion"
                         placeholder="О себе" />
-                    <button type="submit" class="form__save">Сохранить</button>
+                    <button type="submit" class="popup__button-save">Сохранить</button>
                 </form>
             </div>
         </div>
