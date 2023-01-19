@@ -1,8 +1,15 @@
-.header{
-    border-bottom: 1px solid #545454;
-    border-bottom: opacity 0.7;
+.header {
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
     max-width: 880px;
     box-sizing: border-box;
-    margin: 0 auto;
-    margin-bottom: 34px;
+    margin: 0 auto 30px;
+   
+}
+
+@media screen and (max-width: 910px) {
+    .header {
+        max-width: 80%;
+    }
+
+
 }

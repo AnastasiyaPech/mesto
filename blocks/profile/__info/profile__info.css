@@ -5,3 +5,21 @@
     justify-content: space-between;
     box-sizing: border-box;
 }
+
+@media screen and (max-width: 912px){
+
+    .profile__info{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+   
+}
+@media screen and (max-width: 830px){
+
+    .profile__info{
+        align-items: center;
+    }
+
+   
+}

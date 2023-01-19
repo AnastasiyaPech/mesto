@@ -10,8 +10,30 @@
     object-fit: cover;
     background-color: transparent;
     cursor: pointer;
+    margin-left: 243px;
+    margin-top: 35px;
     }
 
     .profile__add:hover{
         opacity: 0.6;
     }
+
+    @media screen and (max-width: 912px){
+
+        .profile__add{
+            margin-left: 90px;
+        }
+    
+       
+    }
+
+    @media screen and (max-width: 830px){
+
+        .profile__add{
+            margin: 30px auto 0;
+        }
+    
+       
+    }
+
+    
