@@ -1,6 +1,6 @@
 .header {
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-    max-width: 880px;
+    max-width: 890px;
     box-sizing: border-box;
     margin: 0 auto 30px;
    
@@ -9,6 +9,15 @@
 @media screen and (max-width: 910px) {
     .header {
         max-width: 80%;
+    }
+
+
+}
+
+@media screen and (max-width: 330px) {
+    .header {
+        max-width: 90%;
+        margin: 0 15px 45px;
     }
 
 

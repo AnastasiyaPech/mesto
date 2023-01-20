@@ -6,12 +6,20 @@
     border-bottom: 1px solid;
     border-color: rgba(0, 0, 0, 0.2);
     color: #000000;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
 .popup__form-input:last-child {
-    margin-bottom: 48px;
+    margin-bottom: 45px;
+}
+
+@media screen and (max-width: 480px) {
+    .popup__form-input {
+        margin-bottom: 45px;
+    }
+
+
 }

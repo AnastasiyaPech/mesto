@@ -1,5 +1,5 @@
 .popup__button-exit {
-    position:absolute;
+    position: absolute;
     width: 32px;
     height: 32px;
     right: -40px;
@@ -13,9 +13,21 @@
     list-style: none;
     object-fit: cover;
     cursor: pointer;
-    
+    margin: 0;
+
 }
 
-.popup__button-exit:hover{
+.popup__button-exit:hover {
     opacity: 0.6;
+}
+
+@media screen and (max-width: 480px) {
+    .popup__button-exit {
+        width: 18px;
+        height: 18px;
+        right: 0;
+        background-size: cover;
+    }
+
+
 }

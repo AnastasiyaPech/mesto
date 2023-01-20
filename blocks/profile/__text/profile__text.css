@@ -7,3 +7,12 @@
     margin-top: 5px;
 }
 
+@media screen and (max-width: 380px){
+
+    .profile__text{
+        font-size: 14px;
+       
+    }
+
+   
+}
