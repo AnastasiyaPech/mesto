@@ -1,7 +1,29 @@
 .profile__description{
     display: flex;
     flex-direction: column;
-    max-width: 336px;
+    /*max-width: 336px;*/
     justify-content: center;
+    box-sizing: border-box;
 
+
+}
+
+@media screen and (max-width: 830px){
+
+    .profile__description{
+        align-items: center;
+    }
+
+   
+}
+
+@media screen and (max-width: 345px){
+
+    .profile__description{
+        /*align-items:baseline;*/
+        justify-content: space-between;
+        width: 100%;
+    }
+
+   
 }

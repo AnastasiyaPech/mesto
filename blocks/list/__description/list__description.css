@@ -17,3 +17,28 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+@media screen and (max-width: 910px){
+   
+    .list__description:nth-child(3n){
+        margin-right: 17px;
+      }
+
+
+}
+
+@media screen and (max-width: 638px){
+
+    .list__description{
+        margin: 0;
+    }
+    .list__description:nth-child(3n){
+        margin-right: 0;
+      }
+
+   
+}
+
+
+
+

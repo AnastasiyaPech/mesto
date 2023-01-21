@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
+    <script src="./script.js"></script>
 </head>
 
 <body class="general-color">
@@ -76,21 +77,22 @@
         <footer class="footer">
             <p class="footer__signature">&copy; 2020 Mesto Russia</p>
         </footer>
-        <div class="popup"> <!--полупрозрачный фон-->
-            <div class="popup__container popup__container_popup_opened"> <!--само окно popup-->
-                <button class="preset-value"></button>
+        <div class="popup"> 
+            <div class="popup__container"> 
+                <button type="button" class="popup__button-exit"></button>
                 <p class="popup__text">Редактировать профиль</p>
-                <form class="form">
-                    <input type="text" class="form__input form__input_type_firstname" name="firstname"
-                        placeholder="Имя" />
-                    <input type="text" class="form__input form__input_type_proffesion" name="proffesion"
-                        placeholder="О себе" />
-                    <button type="submit" class="form__save">Сохранить</button>
+                <form class="popup__form">
+                    <input type="text" class="popup__form-input popup__form-input_type_firstname" name="firstname"
+                        placeholder="Жак-Ив Кусто"/>
+                    <input type="text" class="popup__form-input popup__form-input_type_proffesion" name="proffesion"
+                        placeholder="Исследователь океана"/>
+                    <button type="submit" class="popup__button-save">Сохранить</button>
                 </form>
             </div>
         </div>
-        <script src="./script.js"></script>
+        
     </div>
+
 </body>
 
 </html>
