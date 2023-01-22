@@ -8,24 +8,22 @@ let profileNameInput;
 let profileJobInput;
 
 
-window.onload = function () {
-    popupContainer = document.querySelector(".popup");
-    btnOpen = document.querySelector(".profile__button");
-    btnClose = document.querySelector(".popup__button-exit");
-    formElement = document.querySelector(".popup__form");
-    nameInput = document.querySelector(".popup__form-input_type_firstname");
-    jobInput = document.querySelector(".popup__form-input_type_proffesion");
-    profileNameInput = document.querySelector(".profile__title");
-    profileJobInput = document.querySelector(".profile__text");
+    popupContainer = document.querySelector('.popup');
+    btnOpen = document.querySelector('.profile__button');
+    btnClose = document.querySelector('.popup__button-exit');
+    formElement = document.querySelector('.popup__form');
+    nameInput = document.querySelector('.popup__form-input_type_firstname');
+    jobInput = document.querySelector('.popup__form-input_type_proffesion');
+    profileNameInput = document.querySelector('.profile__title');
+    profileJobInput = document.querySelector('.profile__text');
 
 
-    btnOpen.addEventListener("click", openPopup);
-    btnClose.addEventListener("click", closePopup);
-    formElement.addEventListener("submit", handleFormSubmit);
-}
+    btnOpen.addEventListener('click', openPopup);
+    btnClose.addEventListener('click', closePopup);
+    formElement.addEventListener('submit', handleFormSubmit);
 
 function openPopup() {
-    popupContainer.classList.add("popup_opened");
+    popupContainer.classList.add('popup_opened');
     nameInput.value = profileNameInput.textContent;
     jobInput.value = profileJobInput.textContent;
 
@@ -33,12 +31,11 @@ function openPopup() {
 }
 
 function closePopup() {
-    popupContainer.classList.remove("popup_opened");
+    popupContainer.classList.remove('popup_opened');
 }
 
 
 function handleFormSubmit(evt) {
-    console.log("Starting handleFormSubmit");
     evt.preventDefault(); 
     
 
@@ -46,8 +43,6 @@ function handleFormSubmit(evt) {
     profileNameInput.textContent = nameInput.value;
     profileJobInput.textContent = jobInput.value;
 
-    console.log(nameInput.value);
-    console.log(jobInput.value);
 
   
     closePopup();
