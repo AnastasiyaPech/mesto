@@ -1,34 +1,37 @@
-.profile__image{
-border-radius: 100%;
-margin-right: 30px;
-object-fit: cover;
+.profile__image {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    margin-right: 30px;
+    object-fit: cover;
 }
 
-@media screen and (max-width: 912px){
+@media screen and (max-width: 912px) {
 
-    .profile__image{
+    .profile__image {
         margin-right: 15px;
     }
 
-   
+
 }
 
-@media screen and (max-width: 830px){
+@media screen and (max-width: 830px) {
 
-    .profile__image{
+    .profile__image {
         margin-right: 0;
         margin-bottom: 15px;
     }
 
-   
-}
-@media screen and (max-width: 330px){
 
-    .profile__image{
+}
+
+@media screen and (max-width: 330px) {
+
+    .profile__image {
         margin-bottom: 25px;
 
-       
+
     }
 
-   
+
 }

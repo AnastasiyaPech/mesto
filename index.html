@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
-    <script defer src="./script.js"></script>
 </head>
 
 <body class="content-color">
@@ -32,42 +31,42 @@
                     <li class="list__description">
                         <img src="./images/kch.jpg" class="list__image" alt="карачаевск">
                         <div class="list__container">
-                            <p class="list__text">Карачаевск</p>
+                            <h2 class="list__text">Карачаевск</h2>
                             <button type="button" class="list__button"></button>
                         </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/elbrus.jpg" class="list__image" alt="гора эльбрус">
                         <div class="list__container">
-                            <p class="list__text">Гора Эльбрус</p>
+                            <h2 class="list__text">Гора Эльбрус</h2>
                             <button type="button" class="list__button"></button>
                         </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/dombai.jpg" class="list__image" alt="домбай">
                         <div class="list__container">
-                            <p class="list__text">Домбай</p>
+                            <h2 class="list__text">Домбай</h2>
                             <button type="button" class="list__button"></button>
                         </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/elbrust.jpg" class="list__image" alt="гора эльбрус">
                         <div class="list__container">
-                            <p class="list__text">Гора Эльбрус</p>
+                            <h2 class="list__text">Гора Эльбрус</h2>
                             <button type="button" class="list__button"></button>
                         </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/dombait.jpg" class="list__image" alt="домбай">
                         <div class="list__container">
-                            <p class="list__text">Домбай</p>
+                            <h2 class="list__text">Домбай</h2>
                             <button type="button" class="list__button"></button>
                         </div>
                     </li>
                     <li class="list__description">
                         <img src="./images/kcht.jpg" class="list__image" alt="карачаево-черкессия">
                         <div class="list__container">
-                            <p class="list__text">Карачаево-Черкессия</p>
+                            <h2 class="list__text">Карачаево-Черкессия</h2>
                             <button type="button" class="list__button"></button>
                         </div>
                     </li>
@@ -80,19 +79,19 @@
         <div class="popup"> 
             <div class="popup__container"> 
                 <button type="button" class="popup__button-exit"></button>
-                <p class="popup__text">Редактировать профиль</p>
-                <form class="popup__form">
-                    <input type="text" class="popup__form-input popup__form-input_type_firstname" name="firstname"
-                        placeholder="Жак-Ив Кусто"/>
-                    <input type="text" class="popup__form-input popup__form-input_type_proffesion" name="proffesion"
-                        placeholder="Исследователь океана"/>
+                <h2 class="popup__text">Редактировать профиль</h2>
+                <form name="popup__form" class="popup__form">
+                    <input type="text" requered class="popup__form-input popup__form-input_type_firstname" name="firstname"
+                        placeholder="Имя"/>
+                    <input type="text" requered class="popup__form-input popup__form-input_type_proffesion" name="proffesion"
+                        placeholder="О себе"/>
                     <button type="submit" class="popup__button-save">Сохранить</button>
                 </form>
             </div>
         </div>
         
     </div>
-    
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
