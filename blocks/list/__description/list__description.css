@@ -8,9 +8,9 @@
     background-color: #fff;
 }
 
-.list__description:nth-child(3n){
+.list__description:nth-child(3n) {
     margin-right: 0;
-  }
+}
 
 .list__description:last-child {
     text-overflow: ellipsis;
@@ -18,27 +18,24 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 910px){
-   
-    .list__description:nth-child(3n){
+@media screen and (max-width: 910px) {
+
+    .list__description:nth-child(3n) {
         margin-right: 17px;
-      }
+    }
 
 
 }
 
-@media screen and (max-width: 638px){
+@media screen and (max-width: 638px) {
 
-    .list__description{
+    .list__description {
         margin: 0;
     }
-    .list__description:nth-child(3n){
+
+    .list__description:nth-child(3n) {
         margin-right: 0;
-      }
+    }
 
-   
+
 }
-
-
-
-

@@ -8,19 +8,8 @@
     justify-content: space-between;
 }
 
-@media screen and (max-width: 910px){
-    .elements{
+@media screen and (max-width: 910px) {
+    .elements {
         max-width: 90%;
     }
-}
-
-@media screen and (max-width: 638px){
-
-    .list{
-        display:grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-   
 }

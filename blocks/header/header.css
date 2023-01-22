@@ -2,8 +2,8 @@
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
     max-width: 890px;
     box-sizing: border-box;
-    margin: 0 auto 30px;
-   
+    margin: 37px auto 33px;
+
 }
 
 @media screen and (max-width: 910px) {
@@ -16,8 +16,10 @@
 
 @media screen and (max-width: 330px) {
     .header {
-        max-width: 90%;
-        margin: 0 15px 45px;
+        margin: 0;
+        max-width: 100%;
+        padding: 0 15px 0;
+        margin-bottom: 45px;
     }
 
 

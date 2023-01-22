@@ -1,52 +1,43 @@
-.profile__add{
+.profile__add {
     display: block;
     box-sizing: border-box;
     width: 150px;
     height: 50px;
     margin: 0;
     padding: 0;
-    border: none;
-    background-image: url("../../../images/addbuttons.svg");
+    border: 2px solid #FFFFFF;
+    background-image: url("../../../images/addbutton.svg");
     background-repeat: no-repeat;
     object-fit: cover;
     background-color: transparent;
     cursor: pointer;
-    margin-left: 243px;
+    margin-left: 240px;
     margin-top: 35px;
-    background-size: cover;
-    background-position: 100%;
-   
+    background-position: center;
+
+}
+
+.profile__add:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 912px) {
+
+    .profile__add {
+        margin-left: 70px;
     }
 
-    .profile__add:hover{
-        opacity: 0.6;
+
+}
+
+@media screen and (max-width: 860px) {
+
+    .profile__add {
+        margin: 30px auto 0;
+        width: 282px;
+        border: 1px solid #FFFFFF;
+
     }
 
-    @media screen and (max-width: 912px){
 
-        .profile__add{
-            margin-left: 70px;
-        }
-    
-       
-    }
-
-    @media screen and (max-width: 860px){
-
-        .profile__add{
-            margin: 30px auto 0;
-            width: 282px;
-            border: 1px solid #FFFFFF;
-
-        }
-    
-       
-    }
-
-   
-   
-    
-       
-   
-
-    
+}

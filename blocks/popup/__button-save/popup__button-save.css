@@ -9,9 +9,13 @@
     text-align: center;
     cursor: pointer;
     box-sizing: border-box;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 37px;
+    margin-top: 25px;
 }
 
-.popup__button-save:hover{
+.popup__button-save:hover {
     opacity: 0.8;
 }
 
@@ -19,6 +23,7 @@
 @media screen and (max-width: 480px) {
     .popup__button-save {
         height: 45px;
+        font-size: 14px;
     }
 
 
