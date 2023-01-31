@@ -19,6 +19,9 @@
 @import url(../blocks/list/__image/list__image.css);
 @import url(../blocks/list/__text/list__text.css);
 @import url(../blocks/list/__container/list__container.css);
+@import url(../blocks/list/__trash-button/list__trash-button.css);
+@import url(../blocks/list/__place/list__place.css);
+@import url(../blocks/list/__button/_active/list__button_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__signature/footer__signature.css);
 @import url(../blocks/popup/popup.css);

@@ -31,7 +31,7 @@ const list = document.querySelector('.list')
 
 let profilePopupContainer = document.querySelector('.popup');
 let btnOpen = document.querySelector('.profile__button');
-let btnClose = document.querySelector('.popup__button-exit');       
+let btnClose = document.querySelector('.popup__button-exit');
 let formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('.popup__form-input_type_firstname');
 let jobInput = document.querySelector('.popup__form-input_type_proffesion');
@@ -47,7 +47,7 @@ let placeForm = document.querySelector('.popup__form_place');
 
 
 btnOpen.addEventListener('click', openProfilePopup);
-btnClose.addEventListener('click', closePopup);                    
+btnClose.addEventListener('click', closePopup);
 formElement.addEventListener('submit', handleFormSubmit);
 
 btnOpenPlace.addEventListener('click', openPlacePopup);
@@ -59,12 +59,11 @@ initialCards
     .map(createCard)
     .forEach((card) => {
         list.append(card);
-
     });
-        
+
 placeForm.addEventListener('submit', (evt) => {                        //добавление пользователем карточки на страницу
     evt.preventDefault();
-    
+
     let item = {
         name: placeInput.value,
         link: urlInput.value
@@ -79,6 +78,13 @@ function createCard(item) {            //функция создания кар�
     let cardData = template.cloneNode(true);
     cardData.querySelector('.list__text').textContent = item.name;
     cardData.querySelector('.list__image').src = item.link;
+    cardData.querySelector('.list__image').alt = 'природа';
+    cardData.querySelector('.list__trash-button').addEventListener('click', () => {
+        cardData.remove();
+    });
+    cardData.querySelector('.list__button').addEventListener('click', () => {
+        cardData.querySelector('.list__button').classList.toggle('list__button_active');
+    });
     return cardData;
 }
 
@@ -89,8 +95,6 @@ function openProfilePopup() {          //функция работы с проф
 }
 
 function openPlacePopup() {          //функция работы с добавлением места
-    placeInput.value = 'Sosiska';
-    urlInput.value = 'https://images.unsplash.com/photo-1591244305830-ac2f5484d1a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80';
     openPopup(placePopupContainer);
 }
 
@@ -110,9 +114,9 @@ function handleFormSubmit(evt) {    //функция отправки введе
     evt.preventDefault();
     profileNameInput.textContent = nameInput.value;
     profileJobInput.textContent = jobInput.value;
-    closePopup(profilePopupContainer);                                                                       
+    closePopup(profilePopupContainer);
 }
 
-    
+
 
 
