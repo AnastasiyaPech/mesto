@@ -1,8 +1,11 @@
-.list__button {
-    width: 22px;
-    height: 19px;
+.list__trash-button{
+    position: absolute;
     padding: 0;
-    background: url("../../../images/like2.svg");
+    right: 20px;
+    top: 20px;
+    width: 18px;
+    height: 19px;
+    background: url("../../../images/trash.svg");
     box-sizing: border-box;
     border: none;
     background-repeat: no-repeat;
@@ -14,6 +17,5 @@
 }
 
 .list__button:hover {
-    opacity: 0.5;
+    opacity: 0.6;
 }
-
