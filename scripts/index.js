@@ -45,15 +45,21 @@ let placeInput = document.querySelector('.popup__form-input_type_placename');
 let urlInput = document.querySelector('.popup__form-input_type_url');
 let placeForm = document.querySelector('.popup__form_place');
 
+let picturePopupContainer = document.querySelector('.popup_picture');
+let cardPicture = document.querySelector('.popup__image');
+let titlePicture = document.querySelector('.popup__picture-text');
+let btnClosePicture = document.querySelector('.popup__button-exit_picture');
+
 
 btnOpen.addEventListener('click', openProfilePopup);
-btnClose.addEventListener('click', closePopup);
+btnClose.addEventListener('click', (evt) => { closePopup(profilePopupContainer) });
 formElement.addEventListener('submit', handleFormSubmit);
 
 btnOpenPlace.addEventListener('click', openPlacePopup);
 btnClosePlace.addEventListener('click', (evt) => {
     closePopup(placePopupContainer);
 });
+
 
 initialCards
     .map(createCard)
@@ -74,6 +80,7 @@ placeForm.addEventListener('submit', (evt) => {                        //доб�
     closePopup(placePopupContainer)
 });
 
+
 function createCard(item) {            //функция создания карточки
     let cardData = template.cloneNode(true);
     cardData.querySelector('.list__text').textContent = item.name;
@@ -85,8 +92,30 @@ function createCard(item) {            //функция создания кар�
     cardData.querySelector('.list__button').addEventListener('click', () => {
         cardData.querySelector('.list__button').classList.toggle('list__button_active');
     });
+
+    cardData.querySelector('.list__image').addEventListener('click', () => {
+        openPicturePopup(item.name, item.link);
+    })
+
     return cardData;
+
 }
+
+
+function openPicturePopup(itemname, itemlink) {             //функция работы с поп-апом картинкой 
+    cardPicture.src = itemlink;
+    titlePicture.textContent = itemname;
+
+    openPopup(picturePopupContainer);
+
+}
+
+btnClosePicture.addEventListener('click', (evt) => {
+    closePopup(picturePopupContainer);
+});
+
+
+
 
 function openProfilePopup() {          //функция работы с профилем
     nameInput.value = profileNameInput.textContent;
@@ -97,6 +126,8 @@ function openProfilePopup() {          //функция работы с проф
 function openPlacePopup() {          //функция работы с добавлением места
     openPopup(placePopupContainer);
 }
+
+
 
 
 
