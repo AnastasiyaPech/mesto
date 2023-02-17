@@ -31,6 +31,8 @@ btnClosePlace.addEventListener('click', (evt) => {
     closePopup(placePopupContainer);
 });
 
+//
+
 initialCards
     .map(createCard)
     .forEach((card) => {
