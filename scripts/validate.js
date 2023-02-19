@@ -1,20 +1,15 @@
 const enableValidation = (config) => {                     //обход всех форм и всех инпутов формы
     const formSelector = Array.from(document.querySelectorAll(config.formSelector));
+
     formSelector.forEach((form) => {
-        Array.from(form.querySelectorAll(config.inputSelector))
-            .forEach((input) => {
-                input.addEventListener('input', (evt) => {
-                    showIsValid(config, form, input)
-                });
+        const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
+        inputElements.forEach((input, index, inputs) => {
+            input.addEventListener('input', (evt) => {
+                showIsValid(config, form, input);
+                toggleButtonState(form, config, inputs);
             });
+        });
     });
-
-    // const submitButtonSelector = formSelector.flatMap((item) => {
-    //     Array.from(item.querySelectorAll(config.submitButtonSelector))
-    // });
-
-
-    //elementField.addEventListener('focus','focUsHandler);
 }
 
 enableValidation(formsConfig);
@@ -43,20 +38,24 @@ const showIsValid = (config, form, input) => {       //функция прове
     }
 }
 
-// const submitForm = (evt) => {                           //функция делает кнопку отправки активной
-//     evt.preventDefault();
-//     submitButtonSelector.setAttribute('disabled', 'disabled');
+const hasInvalidInput = (inputs) => {             //функция проверяет наличие невалидного поля
+    return inputs.some((input) => {
+        return !input.validity.valid;
+    });
+};
 
-//     const formIsValid = inputSelector.every((item) => {                //разблокировка кнопки после проверки валидности полей
-//         item.validity.valid;
-//     });
-//     if (!formIsValid) {
-//         submitButtonSelector.setAttribute('disabled', 'disabled');
-//     }
-//     else {
-//         submitButtonSelector.removeAttribute('disabled');
-//     }
-// }
+const toggleButtonState = (form, config, inputs) => { //функция отключает/включает кнопку отправки формы
+    const submitButtonElement = form.querySelector(config.submitButtonSelector);
+    if (hasInvalidInput(inputs)) {
+        submitButtonElement.classList.add('popup__button_disabled');
+        submitButtonElement.setAttribute('disabled', 'disabled');
+    } else {
+        submitButtonElement.classList.remove('popup__button_disabled');
+        submitButtonElement.removeAttribute('disabled');
+    }
+}
+
+
 
 
 
