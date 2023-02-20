@@ -5,16 +5,16 @@ const profilePopupContainer = document.querySelector('.popup_edit-profile');
 const btnOpenProfile = document.querySelector('.profile__button');
 const btnCloseProfile = document.querySelector('.popup__button-exit');
 const formProfile = document.querySelector('.popup__form');
-const nameInputForm = document.querySelector('.popup__form-input_type_firstname');
-const jobInputForm = document.querySelector('.popup__form-input_type_proffesion');
+const nameInputForm = document.querySelector('.popup__input_type_firstname');
+const jobInputForm = document.querySelector('.popup__input_type_proffesion');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__text');
 
 const placePopupContainer = document.querySelector('.popup_place');
 const btnOpenPlace = document.querySelector('.profile__add');
 const btnClosePlace = document.querySelector('.popup__button-exit_place');
-const placeInput = document.querySelector('.popup__form-input_type_placename');
-const urlInput = document.querySelector('.popup__form-input_type_url');
+const placeInput = document.querySelector('.popup__input_type_placename');
+const urlInput = document.querySelector('.popup__input_type_url');
 const formPlace = document.querySelector('.popup__form_place');
 const subBtnPlace = document.querySelector('.popup__button-save_place');
 
