@@ -1,7 +1,7 @@
 const enableValidation = (config) => {                     //обход всех форм и всех инпутов формы
-    const formSelector = Array.from(document.querySelectorAll(config.formSelector));
+    const formElement = Array.from(document.querySelectorAll(config.formSelector));
 
-    formSelector.forEach((form) => {
+    formElement.forEach((form) => {
         const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
         inputElements.forEach((input, index, inputs) => {
             input.addEventListener('input', (evt) => {
@@ -44,15 +44,19 @@ const hasInvalidInput = (inputs) => {             //функция провер�
     });
 };
 
-const toggleButtonState = (form, config, inputs) => { //функция отключает/включает кнопку отправки формы
+const toggleButtonState = (form, config, inputs) => {           //функция отключает/включает кнопку отправки формы
     const submitButtonElement = form.querySelector(config.submitButtonSelector);
     if (hasInvalidInput(inputs)) {
-        submitButtonElement.classList.add('popup__button_disabled');
-        submitButtonElement.setAttribute('disabled', 'disabled');
+        blockSubBtn(submitButtonElement, formsConfig.inactiveButtonClass);
     } else {
-        submitButtonElement.classList.remove('popup__button_disabled');
+        submitButtonElement.classList.remove(config.inactiveButtonClass);
         submitButtonElement.removeAttribute('disabled');
     }
+}
+
+function blockSubBtn(button, config) {                           //функция блокировки кнопки
+    button.classList.add(config);
+    button.setAttribute('disabled', 'disabled');
 }
 
 

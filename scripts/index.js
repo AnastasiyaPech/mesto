@@ -3,8 +3,8 @@ const list = document.querySelector('.list')
 
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
 const btnOpenProfile = document.querySelector('.profile__button');
-const btnCloseProfile = document.querySelector('.popup__button-exit');
-const formProfile = document.querySelector('.popup__form');
+const btnCloseProfile = document.querySelector('.popup__button-exit_profile');
+const formProfile = document.querySelector('.popup__form_profile');
 const nameInputForm = document.querySelector('.popup__input_type_firstname');
 const jobInputForm = document.querySelector('.popup__input_type_proffesion');
 const profileName = document.querySelector('.profile__title');
@@ -36,20 +36,20 @@ initialCards
         list.append(card);
     });
 
-formPlace.addEventListener('submit', (evt) => {                        //добавление пользователем карточки на страницу
+formPlace.addEventListener('submit', addCard);     //добавление пользователем карточки на страницу
+
+function addCard(evt, item) {                     //функция добавления пользователем карточки на страницу 
     evt.preventDefault();
 
-    const item = {
+    item = {
         name: placeInput.value,
         link: urlInput.value
     }
-
     const card = createCard(item);
     list.prepend(card);
-    placeInput.value = '';
-    urlInput.value = '';
-    closePopup(placePopupContainer)
-});
+    formPlace.reset();
+    closePopup(placePopupContainer);
+}
 
 function createCard(item) {                                             //функция создания карточки
     const cardData = template.cloneNode(true);
@@ -85,8 +85,7 @@ function openProfilePopup() {                                 //функция �
 }
 
 function openPlacePopup() {                                   //функция работы с добавлением места
-    subBtnPlace.classList.add('popup__button_disabled');
-    subBtnPlace.setAttribute('disabled', 'disabled');
+    blockSubBtn(subBtnPlace, formsConfig.inactiveButtonClass);
     openPopup(placePopupContainer);
 }
 
@@ -108,8 +107,8 @@ function submitEditProfileForm(evt) {                            //функци�
 }
 
 function closeEscPopup(evt) {                                     //функция закрытия поп-апа esc
-    const modalOpen = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
+        const modalOpen = document.querySelector('.popup_opened');
         closePopup(modalOpen);
     }
 }
@@ -117,11 +116,11 @@ function closeEscPopup(evt) {                                     //функци
 
 const popupsAll = Array.from(document.querySelectorAll('.popup'));
 popupsAll.forEach((form) => {
-    form.addEventListener('click', closeOverlay)
+    form.addEventListener('mousedown', closeOverlay)
 });
 
 
-function closeOverlay(evt) {
+function closeOverlay(evt) {                                        //функция закрытия поп-апа overlay
     const popup = evt.currentTarget;
     if (evt.target === evt.currentTarget) {
         closePopup(popup);
