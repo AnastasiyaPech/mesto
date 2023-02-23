@@ -40,4 +40,5 @@
 @import url(../blocks/popup/__button-exit/_picrure/popup__button-exit_picture.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
+@import url(../blocks/popup/__input-container/popup__input-container.css);
 @import url(../blocks/popup/__button-save/_disabled/popup__button_disabled.css);

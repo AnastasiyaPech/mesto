@@ -1,7 +1,7 @@
 const enableValidation = (config) => {                     //обход всех форм и всех инпутов формы
-    const formElement = Array.from(document.querySelectorAll(config.formSelector));
+    const formElements = Array.from(document.querySelectorAll(config.formSelector));
 
-    formElement.forEach((form) => {
+    formElements.forEach((form) => {
         const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
         inputElements.forEach((input, index, inputs) => {
             input.addEventListener('input', (evt) => {
