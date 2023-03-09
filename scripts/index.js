@@ -1,7 +1,6 @@
 import Card from "./Card.js";
-
-const list = document.querySelector('.list')
-
+import FormValidator from "./FormValidator.js";
+const list = document.querySelector('.list');
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
 const btnOpenProfile = document.querySelector('.profile__button');
 const formProfile = document.querySelector('.popup__form_profile');
@@ -33,18 +32,31 @@ initialCards
         list.append(cardElement);
     })
 
+enableValidation(formsConfig);
+
+const popupsAll = Array.from(document.querySelectorAll('.popup'));
+popupsAll.forEach((form) => {
+    form.addEventListener('mousedown', closeOverlay)
+});
+
+
+//обход всех форм и всех инпутов формы
+function enableValidation(config) {
+    const formElements = Array.from(document.querySelectorAll(config.formSelector));
+
+    formElements.forEach((form) => {
+        const validator = new FormValidator(config, form);
+        validator.enableValidation();
+    });
+}
+
 //добавление пользователем карточки на страницу
 formPlace.addEventListener('submit', addCard);
 
 //функция добавления пользователем карточки на страницу 
-function addCard(evt, item) {
+function addCard(evt) {
     evt.preventDefault();
-
-    item = {
-        name: placeInput.value,
-        link: urlInput.value
-    }
-    const card = new Card(item.name, item.link, openPicturePopup);
+    const card = new Card(placeInput.value, urlInput.value, openPicturePopup);
     const cardElement = card.createCard();
     list.prepend(cardElement);
     formPlace.reset();
@@ -70,6 +82,12 @@ function openProfilePopup() {
 function openPlacePopup() {
     blockSubBtn(subBtnPlace, formsConfig.inactiveButtonClass);
     openPopup(placePopupContainer);
+}
+
+//метод блокировки кнопки
+function blockSubBtn(button, config) {
+    button.classList.add(config);
+    button.setAttribute('disabled', 'disabled');
 }
 
 //общая функция открытия поп-апа
@@ -99,12 +117,6 @@ function closeEscPopup(evt) {
         closePopup(modalOpen);
     }
 }
-
-
-const popupsAll = Array.from(document.querySelectorAll('.popup'));
-popupsAll.forEach((form) => {
-    form.addEventListener('mousedown', closeOverlay)
-});
 
 //функция закрытия поп-апа overlay
 function closeOverlay(evt) {
