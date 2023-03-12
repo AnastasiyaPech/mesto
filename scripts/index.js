@@ -19,20 +19,29 @@ const subBtnPlace = document.querySelector('.popup__button-save_place');
 const picturePopupContainer = document.querySelector('.popup_picture');
 const cardPicture = document.querySelector('.popup__image');
 const titlePicture = document.querySelector('.popup__picture-text');
+const cardTemplateSelector = document.querySelector('#list-template');
 
 btnOpenProfile.addEventListener('click', openProfilePopup);
 formProfile.addEventListener('submit', submitEditProfileForm);
 btnOpenPlace.addEventListener('click', openPlacePopup);
 
+const profileFormValidator = new FormValidator(formsConfig, profilePopupContainer);
+const placeFormValidator = new FormValidator(formsConfig, placePopupContainer);
+profileFormValidator .enableValidation();
+placeFormValidator.enableValidation();
+
 
 initialCards
     .forEach((item) => {
-        const card = new Card(item.name, item.link, openPicturePopup);
-        const cardElement = card.createCard();
+        const cardElement = createCard(item);
         list.append(cardElement);
     })
 
-enableValidation(formsConfig);
+function createCard(item) {
+    const card = new Card(item.name, item.link, cardTemplateSelector, openPicturePopup);
+    const cardElement = card.createCard();
+    return cardElement;
+}
 
 const popupsAll = Array.from(document.querySelectorAll('.popup'));
 popupsAll.forEach((form) => {
@@ -40,24 +49,17 @@ popupsAll.forEach((form) => {
 });
 
 
-//обход всех форм и всех инпутов формы
-function enableValidation(config) {
-    const formElements = Array.from(document.querySelectorAll(config.formSelector));
-
-    formElements.forEach((form) => {
-        const validator = new FormValidator(config, form);
-        validator.enableValidation();
-    });
-}
-
 //добавление пользователем карточки на страницу
 formPlace.addEventListener('submit', addCard);
 
 //функция добавления пользователем карточки на страницу 
 function addCard(evt) {
     evt.preventDefault();
-    const card = new Card(placeInput.value, urlInput.value, openPicturePopup);
-    const cardElement = card.createCard();
+    const item = {
+        name: placeInput.value,
+        link: urlInput.value
+    };
+    const cardElement = createCard(item);
     list.prepend(cardElement);
     formPlace.reset();
     closePopup(placePopupContainer);
@@ -73,21 +75,21 @@ function openPicturePopup(itemname, itemlink) {
 
 //функция работы с профилем
 function openProfilePopup() {
+    profileFormValidator.cleanErrors();
     nameInputForm.value = profileName.textContent;
     jobInputForm.value = profileJob.textContent;
     openPopup(profilePopupContainer);
+
 }
 
 //функция работы с добавлением места
 function openPlacePopup() {
-    blockSubBtn(subBtnPlace, formsConfig.inactiveButtonClass);
+    placeInput.value = "";
+    urlInput.value = "";
+    placeFormValidator.cleanErrors();
+    placeFormValidator.blockSubBtn();
     openPopup(placePopupContainer);
-}
-
-//метод блокировки кнопки
-function blockSubBtn(button, config) {
-    button.classList.add(config);
-    button.setAttribute('disabled', 'disabled');
+   
 }
 
 //общая функция открытия поп-апа

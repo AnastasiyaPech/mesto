@@ -2,6 +2,7 @@ export default class FormValidator {
     constructor(config, form) {
         this._config = config;
         this._form = form;
+        this._submitButtonElement = form.querySelector(config.submitButtonSelector);
     }
 
     enableValidation() {
@@ -48,19 +49,27 @@ export default class FormValidator {
 
     //метод отключает/включает кнопку отправки формы
     _toggleButtonState(form, config, inputs) {
-        const submitButtonElement = form.querySelector(config.submitButtonSelector);
         if (this._hasInvalidInput(inputs)) {
-            this._blockSubBtn(submitButtonElement, formsConfig.inactiveButtonClass);
+            this.blockSubBtn(this._submitButtonElement, formsConfig.inactiveButtonClass);
         } else {
-            submitButtonElement.classList.remove(config.inactiveButtonClass);
-            submitButtonElement.removeAttribute('disabled');
+            this._submitButtonElement.classList.remove(config.inactiveButtonClass);
+            this._submitButtonElement.removeAttribute('disabled');
         }
     }
 
     //метод блокировки кнопки
-    _blockSubBtn(button, config) {
-        button.classList.add(config);
-        button.setAttribute('disabled', 'disabled');
+    blockSubBtn() {
+        this._submitButtonElement.classList.add(this._config.inactiveButtonClass);
+        this._submitButtonElement.setAttribute('disabled', 'disabled');
     }
+
+    cleanErrors() {
+        const inputElements = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+        inputElements.forEach((input) =>{
+            this._hideInputError(this._config, this._form, input);
+           
+        }
+    
+    )};
 
 }
