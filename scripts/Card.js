@@ -1,29 +1,46 @@
 export default class Card {
-    constructor(name, link, onClickFunction) {
+    constructor(name, link, templateSelector, onClickFunction) {
         this._name = name;
         this._link = link;
-        this._cardElement = document.querySelector('#list-template').content.querySelector('.list__description').cloneNode(true);
+        this._templateSelector = templateSelector;
         this._onClickFunction = onClickFunction;
-        
+
     }
-   //метод создания карточки
+    //метод создания карточки
     createCard() {
-        const cardImage = this._cardElement.querySelector('.list__image');
-        this._cardElement.querySelector('.list__text').textContent = this._name;
+        const cardElement = this._templateSelector.content.querySelector('.list__description').cloneNode(true);
+        const cardImage = cardElement.querySelector('.list__image');
+        this._likeButton = cardElement.querySelector('.list__button');
+        cardElement.querySelector('.list__text').textContent = this._name;
         cardImage.src = this._link;
         cardImage.alt = this._name;
-        this._cardElement.querySelector('.list__trash-button').addEventListener('click', () => {
-            this._cardElement.remove();
-        });
-        this._cardElement.querySelector('.list__button').addEventListener('click', () => {
-            this._cardElement.querySelector('.list__button').classList.toggle('list__button_active');
-        });
+        this._setEventListeners(cardElement, cardImage);
 
-        cardImage.addEventListener('click', () => {
-            this._onClickFunction(this._name, this._link);
-        })
-
-        return this._cardElement;
+        return cardElement;
     }
 
+
+    _setEventListeners(cardElement, cardImage) {
+        cardElement.querySelector('.list__trash-button').addEventListener('click', () => {
+            this._deleteCard(cardElement);
+        });
+        this._likeButton.addEventListener('click', () => {
+            this._toggleLike(cardElement);
+        });
+        cardImage.addEventListener('click', () => {
+            this._handleImageClick();
+        })
+    };
+
+
+    _deleteCard(cardElement) {
+        cardElement.remove();
+    }
+    _toggleLike() {
+        this._likeButton.classList.toggle('list__button_active');
+    }
+    _handleImageClick(){
+        this._onClickFunction(this._name, this._link);
+    }
+      
 }
