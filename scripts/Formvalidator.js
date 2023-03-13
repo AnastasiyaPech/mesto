@@ -3,17 +3,24 @@ export default class FormValidator {
         this._config = config;
         this._form = form;
         this._submitButtonElement = form.querySelector(config.submitButtonSelector);
+        this._inputElements = Array.from(this._form.querySelectorAll(this._config.inputSelector));
     }
 
     enableValidation() {
-        const inputElements = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-        inputElements.forEach((input, index, inputs) => {
-            input.addEventListener('input', (evt) => {
-                this._showIsValid(this._config, this._form, input);
-                this._toggleButtonState(this._form, this._config, inputs);
-            });
+        this._inputElements.forEach((input, index, inputs) => {
+            this._setEventListener(input, inputs);
         });
     }
+
+    _setEventListener(input, inputs){
+        input.addEventListener('input', (evt) => {
+            this._showIsValid(this._config, this._form, input);
+            this._toggleButtonState(this._form, this._config, inputs);
+            this._myFunc(input)
+        });
+    }
+    
+
     // метод показывает ошибку
     _showInputError(config, form, input) {
         const errorElement = form.querySelector(`.${input.name}` + config.errorSpanSuffix)
@@ -64,8 +71,7 @@ export default class FormValidator {
     }
 
     cleanErrors() {
-        const inputElements = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-        inputElements.forEach((input) =>{
+        this._inputElements.forEach((input) =>{
             this._hideInputError(this._config, this._form, input);
            
         }
