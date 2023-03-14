@@ -16,7 +16,6 @@ export default class FormValidator {
         input.addEventListener('input', (evt) => {
             this._showIsValid(this._config, this._form, input);
             this._toggleButtonState(this._form, this._config, inputs);
-            this._myFunc(input)
         });
     }
     
