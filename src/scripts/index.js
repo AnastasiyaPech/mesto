@@ -1,5 +1,7 @@
+import '../pages/index.css';
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+
 const list = document.querySelector('.list');
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
 const btnOpenProfile = document.querySelector('.profile__button');
