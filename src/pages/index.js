@@ -1,6 +1,12 @@
 import '../pages/index.css';
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
+import UserInfo from "../scripts/components/UserInfo.js";
+import Popup from "../scripts/components/Popup.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import { initialCards, formsConfig } from "../scripts/utils/constants.js"
 
 const list = document.querySelector('.list');
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
@@ -29,8 +35,14 @@ btnOpenPlace.addEventListener('click', openPlacePopup);
 
 const profileFormValidator = new FormValidator(formsConfig, profilePopupContainer);
 const placeFormValidator = new FormValidator(formsConfig, placePopupContainer);
-profileFormValidator .enableValidation();
+profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
+
+
+const userInfo = new UserInfo({ nameSelector: profileName, descriptionSelector: profileJob });
+
+const popupImage = new PopupWithImage(picturePopupContainer);
+popupImage.setEventListeners();
 
 
 initialCards
@@ -40,7 +52,7 @@ initialCards
     })
 
 function createCard(item) {
-    const card = new Card(item.name, item.link, cardTemplateSelector, openPicturePopup);
+    const card = new Card(item.name, item.link, cardTemplateSelector, (imgName, imgLink) => popupImage.open(imgName, imgLink));
     const cardElement = card.createCard();
     return cardElement;
 }
@@ -67,17 +79,22 @@ function addCard(evt) {
     closePopup(placePopupContainer);
 }
 
-//функция работы с поп-апом картинкой 
-function openPicturePopup(itemname, itemlink) {
-    cardPicture.src = itemlink;
-    titlePicture.textContent = itemname;
-    cardPicture.alt = itemname;
-    openPopup(picturePopupContainer);
-}
+// убрала в PopupWithImage
+// function openPicturePopup(itemname, itemlink) {
+//     cardPicture.src = itemlink;
+//     titlePicture.textContent = itemname;
+//     cardPicture.alt = itemname;
+//     openPopup(picturePopupContainer);
+// }
 
 //функция работы с профилем
 function openProfilePopup() {
     profileFormValidator.cleanErrors();
+    const info = userInfo.getUserInfo();
+    nameInputForm.value = info.name;
+    jobInputForm.value = info.description;
+
+
     nameInputForm.value = profileName.textContent;
     jobInputForm.value = profileJob.textContent;
     openPopup(profilePopupContainer);
@@ -91,7 +108,7 @@ function openPlacePopup() {
     placeFormValidator.cleanErrors();
     placeFormValidator.blockSubBtn();
     openPopup(placePopupContainer);
-   
+
 }
 
 //общая функция открытия поп-апа

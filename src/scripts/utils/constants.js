@@ -34,3 +34,5 @@ const formsConfig = {
     errorClass: 'popup__error_visible',
     errorSpanSuffix: '-input-error'
 };
+
+export { initialCards, formsConfig};
