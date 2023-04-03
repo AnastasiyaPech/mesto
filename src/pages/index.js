@@ -36,7 +36,7 @@ const placeFormValidator = new FormValidator(formsConfig, placePopupContainer);
 profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
 
-const userInfo = new UserInfo({ nameSelector: profileName, descriptionSelector: profileJob });
+const userInfo = new UserInfo({ userName: profileName, description: profileJob });
 
 const popupImage = new PopupWithImage(picturePopupContainer);
 popupImage.setEventListeners();
@@ -54,7 +54,7 @@ const cardsSection = new Section({
         list.append(cardElement);
     },
 },
-    cardTemplateSelector,
+    list,
 );
 cardsSection.renderItems();
 
@@ -66,11 +66,11 @@ function createCard(item) {
 
 function addCard(data) {
     const item = {
-        name: placeInput.value,
-        link: urlInput.value
+        name: data['place'],
+        link: data['link']
     };
     const cardElement = createCard(item);
-    list.prepend(cardElement);
+    cardsSection.addItem(cardElement);
 }
 
 
@@ -85,8 +85,6 @@ function openProfilePopup() {
 
 //функция работы с добавлением места
 function openPlacePopup() {
-    placeInput.value = "";
-    urlInput.value = "";
     placeFormValidator.cleanErrors();
     placeFormValidator.blockSubBtn();
     popupPlace.open();
@@ -94,7 +92,7 @@ function openPlacePopup() {
 
 //функция отправки введенных пользователем значений для профиля
 function submitEditProfileForm(data) {
-    userInfo.setUserInfo({ name: nameInputForm.value, description: jobInputForm.value });
+    userInfo.setUserInfo({ name: data['firstname'], description: data['proffesion'] });
     popupProfile.close();
 }
 
