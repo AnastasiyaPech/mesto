@@ -38,13 +38,13 @@ placeFormValidator.enableValidation();
 
 const userInfo = new UserInfo({ userName: profileName, description: profileJob });
 
-const popupImage = new PopupWithImage(picturePopupContainer);
+const popupImage = new PopupWithImage('.popup_picture');
 popupImage.setEventListeners();
 
-const popupPlace = new PopupWithForm(placePopupContainer, addCard);
+const popupPlace = new PopupWithForm('.popup_place', addCard);
 popupPlace.setEventListeners();
 
-const popupProfile = new PopupWithForm(profilePopupContainer, submitEditProfileForm);
+const popupProfile = new PopupWithForm('.popup_edit-profile', submitEditProfileForm);
 popupProfile.setEventListeners();
 
 const cardsSection = new Section({

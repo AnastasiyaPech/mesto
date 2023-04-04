@@ -8,33 +8,33 @@ export default class Card {
     }
     //метод создания карточки
     createCard() {
-        const cardElement = this._templateSelector.content.querySelector('.list__description').cloneNode(true);
-        const cardImage = cardElement.querySelector('.list__image');
-        this._likeButton = cardElement.querySelector('.list__button');
-        cardElement.querySelector('.list__text').textContent = this._name;
-        cardImage.src = this._link;
-        cardImage.alt = this._name;
-        this._setEventListeners(cardElement, cardImage);
+        this._cardElement = this._templateSelector.content.querySelector('.list__description').cloneNode(true);
+        this._cardImage = this._cardElement.querySelector('.list__image');
+        this._likeButton = this._cardElement.querySelector('.list__button');
+        this._cardElement.querySelector('.list__text').textContent = this._name;
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        this._setEventListeners();
 
-        return cardElement;
+        return this._cardElement;
     }
 
 
-    _setEventListeners(cardElement, cardImage) {
-        cardElement.querySelector('.list__trash-button').addEventListener('click', () => {
-            this._deleteCard(cardElement);
+    _setEventListeners() {
+        this._cardElement.querySelector('.list__trash-button').addEventListener('click', () => {
+            this._deleteCard(this._cardElement);
         });
         this._likeButton.addEventListener('click', () => {
-            this._toggleLike(cardElement);
+            this._toggleLike(this._cardElement);
         });
-        cardImage.addEventListener('click', () => {
+        this._cardImage.addEventListener('click', () => {
             this._handleImageClick();
         })
     };
 
 
-    _deleteCard(cardElement) {
-        cardElement.remove();
+    _deleteCard() {
+        this._cardElement.remove();
     }
     _toggleLike() {
         this._likeButton.classList.toggle('list__button_active');
