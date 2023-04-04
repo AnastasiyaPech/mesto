@@ -56,7 +56,7 @@ export default class FormValidator {
     //метод отключает/включает кнопку отправки формы
     _toggleButtonState(form, config, inputs) {
         if (this._hasInvalidInput(inputs)) {
-            this.blockSubBtn(this._submitButtonElement, config.inactiveButtonClass);
+            this.blockSubBtn();
         } else {
             this._submitButtonElement.classList.remove(config.inactiveButtonClass);
             this._submitButtonElement.removeAttribute('disabled');
