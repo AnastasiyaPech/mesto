@@ -5,13 +5,16 @@ export default class Section {
         this._selector = selector;
     }
     renderItems() {
-        this._items.forEach((item) => {
-            this._renderer(item);
-        });
+        this._items
+            .then((items) => {
+                items.forEach((item) => {
+                    this._renderer(item);
+                });
+            })
     }
 
-    addItem(element){
-        this._selector.prepend(element);  
+    addItem(element) {
+        this._selector.prepend(element);
     }
 
 }

@@ -5,7 +5,8 @@ import Section from "../scripts/components/Section.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import { initialCards, formsConfig } from "../scripts/utils/constants.js"
+import { initialCards, formsConfig } from "../scripts/utils/constants.js";
+import Api from "../scripts/components/Api"
 
 const list = document.querySelector('.list');
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
@@ -47,8 +48,10 @@ popupPlace.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_edit-profile', submitEditProfileForm);
 popupProfile.setEventListeners();
 
+const api = new Api();
+
 const cardsSection = new Section({
-    items: initialCards,
+    items: api.getInitialCards(),
     renderer: (item) => {
         const cardElement = createCard(item);
         list.append(cardElement);
@@ -58,6 +61,7 @@ const cardsSection = new Section({
 );
 cardsSection.renderItems();
 
+
 function createCard(item) {
     const card = new Card(item.name, item.link, cardTemplateSelector, (imgName, imgLink) => popupImage.open(imgName, imgLink));
     const cardElement = card.createCard();
@@ -66,13 +70,17 @@ function createCard(item) {
 
 function addCard(data) {
     const item = {
-        name: data['place'],
-        link: data['link']
-    };
-    const cardElement = createCard(item);
-    cardsSection.addItem(cardElement);
-}
+        name: data.place,
+        link: data.link
+    }
+    api.createItem(item) 
+        .then((res) => {
+          
+            const cardElement = createCard(res);
+            cardsSection.addItem(cardElement);
 
+        })
+}
 
 //функция работы с профилем
 function openProfilePopup() {
