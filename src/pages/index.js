@@ -37,7 +37,13 @@ const placeFormValidator = new FormValidator(formsConfig, placePopupContainer);
 profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
 
+const api = new Api();
+
 const userInfo = new UserInfo({ userName: profileName, description: profileJob });
+api.getToUserInfo()
+    .then((data) => {
+        userInfo.setUserInfo({ name: data.name, description: data.about });
+    })
 
 const popupImage = new PopupWithImage('.popup_picture');
 popupImage.setEventListeners();
@@ -48,7 +54,7 @@ popupPlace.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_edit-profile', submitEditProfileForm);
 popupProfile.setEventListeners();
 
-const api = new Api();
+//api.changeUserInfo();
 
 const cardsSection = new Section({
     items: api.getInitialCards(),
@@ -73,14 +79,15 @@ function addCard(data) {
         name: data.place,
         link: data.link
     }
-    api.createItem(item) 
+    api.createItem(item)
         .then((res) => {
-          
+
             const cardElement = createCard(res);
             cardsSection.addItem(cardElement);
 
         })
 }
+
 
 //функция работы с профилем
 function openProfilePopup() {
@@ -100,7 +107,14 @@ function openPlacePopup() {
 
 //функция отправки введенных пользователем значений для профиля
 function submitEditProfileForm(data) {
-    userInfo.setUserInfo({ name: data['firstname'], description: data['proffesion'] });
+    const value = {
+        name: data.firstname,
+        about: data.proffesion
+    }
+    api.changeUserInfo(value)
+        .then((res) => {
+            userInfo.setUserInfo({ name: res.name, description: res.about });
+        })
     popupProfile.close();
 }
 

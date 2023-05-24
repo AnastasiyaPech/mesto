@@ -16,8 +16,8 @@ export default class Api {
                 } else {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
-            })     
-                                             
+            })
+
     }
     // добавление новой карточки на страницу
     createItem(data) {
@@ -40,6 +40,44 @@ export default class Api {
                 }
             })
     }
+    // загрузка информации о ползователе с сервера
+    getToUserInfo() {
+        return fetch('https://nomoreparties.co/v1/cohort-66/users/me', {
+            headers: {
+                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2'
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+    }
+
+    // редактирование профиля пользователя
+    changeUserInfo(data) {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me ', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about
+            }),
+            headers: {
+                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
+                "Content-Type": 'application/json'
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+    }
+
 
 }
 
