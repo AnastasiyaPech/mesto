@@ -54,7 +54,6 @@ popupPlace.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_edit-profile', submitEditProfileForm);
 popupProfile.setEventListeners();
 
-//api.changeUserInfo();
 
 const cardsSection = new Section({
     items: api.getInitialCards(),
@@ -69,7 +68,7 @@ cardsSection.renderItems();
 
 
 function createCard(item) {
-    const card = new Card(item.name, item.link, cardTemplateSelector, (imgName, imgLink) => popupImage.open(imgName, imgLink));
+    const card = new Card(item.name, item.link, item.likes.length, cardTemplateSelector, (imgName, imgLink) => popupImage.open(imgName, imgLink));
     const cardElement = card.createCard();
     return cardElement;
 }

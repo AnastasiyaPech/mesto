@@ -17,8 +17,11 @@ export default class Api {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
             })
+            .catch((err) => {
+                console.log(err);
+            })
+    };
 
-    }
     // добавление новой карточки на страницу
     createItem(data) {
         return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
@@ -39,7 +42,11 @@ export default class Api {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
             })
-    }
+            .catch((err) => {
+                console.log(err);
+            })
+    };
+
     // загрузка информации о ползователе с сервера
     getToUserInfo() {
         return fetch('https://nomoreparties.co/v1/cohort-66/users/me', {
@@ -54,7 +61,10 @@ export default class Api {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
             })
-    }
+            .catch((err) =>{
+                console.log(err);
+            })
+    };
 
     // редактирование профиля пользователя
     changeUserInfo(data) {
@@ -76,7 +86,10 @@ export default class Api {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
             })
-    }
+            .catch((err) =>{
+                console.log(err);
+            })
+    };
 
 
 }

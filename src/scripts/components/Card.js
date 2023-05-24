@@ -1,9 +1,10 @@
 export default class Card {
-    constructor(name, link, templateSelector, onClickFunction) {
+    constructor(name, link, countLikes, templateSelector, onClickFunction) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
         this._onClickFunction = onClickFunction;
+        this._countLikes = countLikes;
 
     }
     //метод создания карточки
@@ -11,9 +12,11 @@ export default class Card {
         this._cardElement = this._templateSelector.content.querySelector('.list__description').cloneNode(true);
         this._cardImage = this._cardElement.querySelector('.list__image');
         this._likeButton = this._cardElement.querySelector('.list__button');
+        this._countElement = this._cardElement.querySelector('.list__countLikes');
         this._cardElement.querySelector('.list__text').textContent = this._name;
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
+        this._countElement.textContent = this._countLikes;
         this._setEventListeners();
 
         return this._cardElement;
