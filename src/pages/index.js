@@ -6,7 +6,8 @@ import UserInfo from "../scripts/components/UserInfo.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import { initialCards, formsConfig } from "../scripts/utils/constants.js";
-import Api from "../scripts/components/Api"
+import Api from "../scripts/components/Api";
+import PopupWithConfirm from "../scripts/components/PopupWithConfirm.js"
 
 const list = document.querySelector('.list');
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
@@ -54,6 +55,8 @@ popupPlace.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_edit-profile', submitEditProfileForm);
 popupProfile.setEventListeners();
 
+const popupConfirm = new PopupWithConfirm('.popup_actionCheck', deleteCardConfirmPopup);
+popupConfirm.setEventListeners();
 
 const cardsSection = new Section({
     items: api.getInitialCards(),
@@ -68,7 +71,10 @@ cardsSection.renderItems();
 
 
 function createCard(item) {
-    const card = new Card(item.name, item.link, item.likes.length, cardTemplateSelector, (imgName, imgLink) => popupImage.open(imgName, imgLink));
+    const card = new Card(item.name, item.link, item.likes.length, item._id, cardTemplateSelector,
+        (imgName, imgLink) => popupImage.open(imgName, imgLink),
+        () => popupConfirm.open(),
+    );
     const cardElement = card.createCard();
     return cardElement;
 }
@@ -80,7 +86,6 @@ function addCard(data) {
     }
     api.createItem(item)
         .then((res) => {
-
             const cardElement = createCard(res);
             cardsSection.addItem(cardElement);
 
@@ -117,6 +122,14 @@ function submitEditProfileForm(data) {
     popupProfile.close();
 }
 
+//функция удаления карточки через попап
+//api.deleteItem();
+function deleteCardConfirmPopup() {
+    api.deleteItem(id)
+        .then(() => {
+            card.deleteCard();
+        })
+}
 
 
 

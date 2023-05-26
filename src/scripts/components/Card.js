@@ -1,10 +1,12 @@
 export default class Card {
-    constructor(name, link, countLikes, templateSelector, onClickFunction) {
+    constructor(name, link, countLikes, id, templateSelector, onClickFunction, openPopupFunction) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
         this._onClickFunction = onClickFunction;
+        this._openPopupFunction = openPopupFunction;
         this._countLikes = countLikes;
+        this._id = id;
 
     }
     //метод создания карточки
@@ -22,11 +24,14 @@ export default class Card {
         return this._cardElement;
     }
 
-
     _setEventListeners() {
+        // this._cardElement.querySelector('.list__trash-button').addEventListener('click', this._deleteFunction
+        // // () => { this._deleteCard(this._cardElement);}
+        // );
         this._cardElement.querySelector('.list__trash-button').addEventListener('click', () => {
-            this._deleteCard(this._cardElement);
-        });
+            this._openBinClick();
+        })
+
         this._likeButton.addEventListener('click', () => {
             this._toggleLike(this._cardElement);
         });
@@ -36,14 +41,17 @@ export default class Card {
     };
 
 
-    _deleteCard() {
+    deleteCard() {
         this._cardElement.remove();
     }
     _toggleLike() {
         this._likeButton.classList.toggle('list__button_active');
     }
-    _handleImageClick(){
+    _handleImageClick() {
         this._onClickFunction(this._name, this._link);
     }
-      
+    _openBinClick() {
+        this._openPopupFunction();
+    }
+
 }

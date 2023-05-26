@@ -47,6 +47,26 @@ export default class Api {
             })
     };
 
+    //удаление карточки
+    deleteItem(id) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-66/cards/ + ${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    };
+
     // загрузка информации о ползователе с сервера
     getToUserInfo() {
         return fetch('https://nomoreparties.co/v1/cohort-66/users/me', {
@@ -61,7 +81,7 @@ export default class Api {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
             })
-            .catch((err) =>{
+            .catch((err) => {
                 console.log(err);
             })
     };
@@ -86,7 +106,7 @@ export default class Api {
                     return Promise.reject(`Ошибка: ${res.status}`);
                 }
             })
-            .catch((err) =>{
+            .catch((err) => {
                 console.log(err);
             })
     };
