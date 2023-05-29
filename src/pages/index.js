@@ -94,7 +94,7 @@ function addCard(data) {
         name: data.place,
         link: data.link
     }
-    api.createItem(item)
+    return api.createItem(item)
         .then((res) => {
             const cardElement = createCard(res);
             cardsSection.addItem(cardElement);
@@ -130,16 +130,13 @@ function submitEditProfileForm(data) {
         name: data.firstname,
         about: data.proffesion
     }
-    api.changeUserInfo(value)
-        .then((res) => {
+    return api.changeUserInfo(value)
+        .then((res) => {    
             userInfo.setUserInfo({ name: res.name, description: res.about });
         })
-    popupProfile.close();
 }
 
-
 //функция удаления карточки через попап
-//api.deleteItem();
 function deleteCardConfirmPopup(card) {
     api.deleteItem(card._cardId)
         .then(() => {
@@ -147,17 +144,15 @@ function deleteCardConfirmPopup(card) {
         })
 }
 
-
 // функция работы с попапом-аватаром
 function changeAvatarPopup(data) {
     const value = {
         avatar: data.link
     }
-    api.changeAvatarImage(value)
+    return api.changeAvatarImage(value)
         .then((res) => {
-            btnOpenAvatar.style.backgroundImage = "url(" + res.avatar +")";
+            btnOpenAvatar.style.backgroundImage = "url(" + res.avatar + ")";
         })
-    popupAvatar.close();
 }
 
 

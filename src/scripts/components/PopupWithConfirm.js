@@ -20,6 +20,9 @@ export default class PopupWithConfirm extends Popup {
         });
 
     }
+    submitFunction(){
+        this._submitFunction = submitFunction;
+    }
 
     
 }
