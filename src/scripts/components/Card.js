@@ -1,10 +1,11 @@
 export default class Card {
-    constructor(name, link, countLikes, cardId, templateSelector, onClickFunction, openPopupFunction) {
+    constructor(name, link, countLikes, cardId, templateSelector, onClickFunction, deletePopup, deleteImageFunction) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
         this._onClickFunction = onClickFunction;
-        this._openPopupFunction = openPopupFunction;
+        this._deletePopup = deletePopup;
+        this._deleteImageFunction = deleteImageFunction;
         this._countLikes = countLikes;
         this._cardId = cardId;
 
@@ -20,7 +21,7 @@ export default class Card {
         this._cardImage.alt = this._name;
         this._countElement.textContent = this._countLikes;
         this._setEventListeners();
-        
+
         return this._cardElement;
     }
 
@@ -28,8 +29,11 @@ export default class Card {
         // this._cardElement.querySelector('.list__trash-button').addEventListener('click', this._deleteFunction
         // // () => { this._deleteCard(this._cardElement);}
         // );
+
         this._cardElement.querySelector('.list__trash-button').addEventListener('click', () => {
-            this._openBinClick();
+            this._deletePopup.open(() => {
+                this._deleteImageFunction(this);
+            });
         })
 
         this._likeButton.addEventListener('click', () => {
@@ -44,14 +48,13 @@ export default class Card {
     deleteCard() {
         this._cardElement.remove();
     }
+
     _toggleLike() {
         this._likeButton.classList.toggle('list__button_active');
     }
     _handleImageClick() {
         this._onClickFunction(this._name, this._link);
     }
-    _openBinClick() {
-        this._openPopupFunction(this);
-    }
+
 
 }

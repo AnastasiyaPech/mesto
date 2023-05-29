@@ -49,7 +49,7 @@ const api = new Api();
 const userInfo = new UserInfo({ userName: profileName, description: profileJob });
 api.getToUserInfo()
     .then((data) => {
-        userInfo.setUserInfo({ name: data.name, description: data.about });
+        userInfo.setUserInfo({ name: data.name, description: data.about, id: data._id });
     })
 
 const popupImage = new PopupWithImage('.popup_picture');
@@ -61,7 +61,7 @@ popupPlace.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_edit-profile', submitEditProfileForm);
 popupProfile.setEventListeners();
 
-const popupConfirm = new PopupWithConfirm('.popup_actionCheck', deleteCardConfirmPopup);
+const popupConfirm = new PopupWithConfirm('.popup_actionCheck');
 popupConfirm.setEventListeners();
 
 const popupAvatar = new PopupWithForm('.popup_avatar', changeAvatarPopup);
@@ -82,7 +82,7 @@ cardsSection.renderItems();
 function createCard(item) {
     const card = new Card(item.name, item.link, item.likes.length, item._id, cardTemplateSelector,
         (imgName, imgLink) => popupImage.open(imgName, imgLink),
-        (currentCard) => popupConfirm.open(currentCard),
+        popupConfirm, deleteCardConfirmPopup
     );
 
     const cardElement = card.createCard();
@@ -131,7 +131,7 @@ function submitEditProfileForm(data) {
         about: data.proffesion
     }
     return api.changeUserInfo(value)
-        .then((res) => {    
+        .then((res) => {
             userInfo.setUserInfo({ name: res.name, description: res.about });
         })
 }
@@ -140,6 +140,8 @@ function submitEditProfileForm(data) {
 function deleteCardConfirmPopup(card) {
     api.deleteItem(card._cardId)
         .then(() => {
+            //сделать чтобы карточка удалялась когда нет ошибок
+            // что возр
             card.deleteCard();
         })
 }

@@ -1,11 +1,15 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirm extends Popup {
-    constructor(popupSelector, handleFormSubmit) {
+    constructor(popupSelector) {
         super(popupSelector);
-        this._handleFormSubmit = handleFormSubmit;
         this._popupForm = this._popup1.querySelector('.popup__form');
       
+    }
+
+    open(onConfirmFunction) {
+        super.open()
+        this._onConfirmFunction = onConfirmFunction;
     }
 
 // open -> write to this._currentCard 
@@ -15,14 +19,19 @@ export default class PopupWithConfirm extends Popup {
         super.setEventListeners();
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._handleFormSubmit();
-           
+            // this._handleFormSubmit();
+            this._onConfirmFunction();
+            this.close();
         });
 
     }
-    submitFunction(){
-        this._submitFunction = submitFunction;
-    }
+    // setUpOnConfirm(onConfirmFunction){
+    //     this._onConfirmFunction = onConfirmFunction;
+    // }
+
+    // onConfirm() {
+    //     this._onConfirmFunction();
+    // } 
 
     
 }

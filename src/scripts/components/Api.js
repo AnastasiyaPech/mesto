@@ -64,6 +64,7 @@ export default class Api {
             })
             .catch((err) => {
                 console.log(err);
+                throw err;
             })
     };
 
@@ -92,7 +93,8 @@ export default class Api {
             method: 'PATCH',
             body: JSON.stringify({
                 name: data.name,
-                about: data.about
+                about: data.about,
+                id: data.id
             }),
             headers: {
                 authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
