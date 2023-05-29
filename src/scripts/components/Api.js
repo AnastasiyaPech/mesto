@@ -48,8 +48,8 @@ export default class Api {
     };
 
     //удаление карточки
-    deleteItem(id) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-66/cards/ + ${id}`, {
+    deleteItem(cardId) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-66/cards/${cardId}`, {
             method: 'DELETE',
             headers: {
                 authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
@@ -93,6 +93,30 @@ export default class Api {
             body: JSON.stringify({
                 name: data.name,
                 about: data.about
+            }),
+            headers: {
+                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
+                "Content-Type": 'application/json'
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    };
+
+    //смена аватара
+    changeAvatarImage(data) {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me/avatar', {
+            method: 'PATCH',
+            body: JSON.stringify({
+               avatar: data.avatar
             }),
             headers: {
                 authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',

@@ -29,14 +29,20 @@ const picturePopupContainer = document.querySelector('.popup_picture');
 const cardPicture = document.querySelector('.popup__image');
 const titlePicture = document.querySelector('.popup__picture-text');
 const cardTemplateSelector = document.querySelector('#list-template');
+const btnOpenAvatar = document.querySelector('.profile__image');
+const avatarInputForm = document.querySelector('.popup__input_type_avatar');
+const avatarPopupContainer = document.querySelector('.popup_avatar');
 
 btnOpenProfile.addEventListener('click', openProfilePopup);
 btnOpenPlace.addEventListener('click', openPlacePopup);
+btnOpenAvatar.addEventListener('click', openAvatarPopup);
 
 const profileFormValidator = new FormValidator(formsConfig, profilePopupContainer);
 const placeFormValidator = new FormValidator(formsConfig, placePopupContainer);
+const avatarFormValidator = new FormValidator(formsConfig, avatarPopupContainer);
 profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 const api = new Api();
 
@@ -58,6 +64,9 @@ popupProfile.setEventListeners();
 const popupConfirm = new PopupWithConfirm('.popup_actionCheck', deleteCardConfirmPopup);
 popupConfirm.setEventListeners();
 
+const popupAvatar = new PopupWithForm('.popup_avatar', changeAvatarPopup);
+popupAvatar.setEventListeners();
+
 const cardsSection = new Section({
     items: api.getInitialCards(),
     renderer: (item) => {
@@ -73,8 +82,9 @@ cardsSection.renderItems();
 function createCard(item) {
     const card = new Card(item.name, item.link, item.likes.length, item._id, cardTemplateSelector,
         (imgName, imgLink) => popupImage.open(imgName, imgLink),
-        () => popupConfirm.open(),
+        (currentCard) => popupConfirm.open(currentCard),
     );
+
     const cardElement = card.createCard();
     return cardElement;
 }
@@ -92,7 +102,6 @@ function addCard(data) {
         })
 }
 
-
 //функция работы с профилем
 function openProfilePopup() {
     profileFormValidator.cleanErrors();
@@ -109,6 +118,12 @@ function openPlacePopup() {
     popupPlace.open();
 }
 
+function openAvatarPopup() {
+    avatarFormValidator.cleanErrors();
+    placeFormValidator.blockSubBtn();
+    popupAvatar.open();
+}
+
 //функция отправки введенных пользователем значений для профиля
 function submitEditProfileForm(data) {
     const value = {
@@ -122,13 +137,27 @@ function submitEditProfileForm(data) {
     popupProfile.close();
 }
 
+
 //функция удаления карточки через попап
 //api.deleteItem();
-function deleteCardConfirmPopup() {
-    api.deleteItem(id)
+function deleteCardConfirmPopup(card) {
+    api.deleteItem(card._cardId)
         .then(() => {
             card.deleteCard();
         })
+}
+
+
+// функция работы с попапом-аватаром
+function changeAvatarPopup(data) {
+    const value = {
+        avatar: data.link
+    }
+    api.changeAvatarImage(value)
+        .then((res) => {
+            btnOpenAvatar.style.backgroundImage = "url(" + res.avatar +")";
+        })
+    popupAvatar.close();
 }
 
 

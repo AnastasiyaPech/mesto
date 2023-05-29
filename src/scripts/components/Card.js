@@ -1,12 +1,12 @@
 export default class Card {
-    constructor(name, link, countLikes, id, templateSelector, onClickFunction, openPopupFunction) {
+    constructor(name, link, countLikes, cardId, templateSelector, onClickFunction, openPopupFunction) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
         this._onClickFunction = onClickFunction;
         this._openPopupFunction = openPopupFunction;
         this._countLikes = countLikes;
-        this._id = id;
+        this._cardId = cardId;
 
     }
     //метод создания карточки
@@ -20,7 +20,7 @@ export default class Card {
         this._cardImage.alt = this._name;
         this._countElement.textContent = this._countLikes;
         this._setEventListeners();
-
+        
         return this._cardElement;
     }
 
@@ -51,7 +51,7 @@ export default class Card {
         this._onClickFunction(this._name, this._link);
     }
     _openBinClick() {
-        this._openPopupFunction();
+        this._openPopupFunction(this);
     }
 
 }
