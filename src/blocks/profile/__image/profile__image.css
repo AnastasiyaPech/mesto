@@ -7,7 +7,6 @@
     box-sizing: border-box;
     background-image: url(../../../images/avatar.jpg);
     background-repeat: no-repeat;
-    object-fit: cover;
     background-color: transparent;
     cursor: pointer;
     background-position: center;
