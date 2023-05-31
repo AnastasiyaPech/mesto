@@ -1,14 +1,13 @@
-export default class Api {
-    constructor(options) {
-        // тело конструктора
+class Api {
+    constructor(baseUrl, headers) {
+        this._baseUrl = baseUrl;
+        this._headers = headers;
     }
 
     // получение всех карточек в виде массива
     getInitialCards() {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
-            headers: {
-                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2'
-            }
+        return fetch(`${this._baseUrl}/cards`, {
+            headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
@@ -24,16 +23,13 @@ export default class Api {
 
     // добавление новой карточки на страницу
     createItem(data) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
+        return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             body: JSON.stringify({
                 name: data.name,
                 link: data.link
             }),
-            headers: {
-                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
-                "Content-Type": 'application/json'
-            }
+            headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
@@ -49,11 +45,9 @@ export default class Api {
 
     //удаление карточки
     deleteItem(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-66/cards/${cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: 'DELETE',
-            headers: {
-                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
-            }
+            headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
@@ -70,10 +64,8 @@ export default class Api {
 
     // загрузка информации о ползователе с сервера
     getToUserInfo() {
-        return fetch('https://nomoreparties.co/v1/cohort-66/users/me', {
-            headers: {
-                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2'
-            }
+        return fetch(`${this._baseUrl}/users/me`, {
+            headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
@@ -84,22 +76,20 @@ export default class Api {
             })
             .catch((err) => {
                 console.log(err);
+                throw err;
             })
     };
 
     // редактирование профиля пользователя
     changeUserInfo(data) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me ', {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             body: JSON.stringify({
                 name: data.name,
                 about: data.about,
                 id: data.id
             }),
-            headers: {
-                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
-                "Content-Type": 'application/json'
-            }
+            headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
@@ -110,20 +100,18 @@ export default class Api {
             })
             .catch((err) => {
                 console.log(err);
+                throw err;
             })
     };
 
     //смена аватара
     changeAvatarImage(data) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me/avatar', {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             body: JSON.stringify({
-               avatar: data.avatar
+                avatar: data.avatar
             }),
-            headers: {
-                authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
-                "Content-Type": 'application/json'
-            }
+            headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
@@ -134,16 +122,59 @@ export default class Api {
             })
             .catch((err) => {
                 console.log(err);
+                throw err;
             })
     };
 
+    //постановка лайка
+    putLike(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            method: 'PUT',
+            headers: this._headers
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+
+            })
+    }
+
+    //удаление лайка
+    deleteLike(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+
+            })
+    }
+    //получение инфы для первоначальной отрисовки карточки
+    getAllData(){
+        return Promise.all([this.getInitialCards(), this.getToUserInfo()])
+    }
 
 }
-
-// const api = new Api({
-//     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
-//     headers: {
-//         authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
-//         'Content-Type': 'application/json'
-//     }
-// }); 
+const api = new Api(
+    'https://mesto.nomoreparties.co/v1/cohort-66',
+    {
+        authorization: 'daaa7891-307a-4edb-9b82-7c5e6a95cac2',
+        "Content-Type": 'application/json'
+    });
+export default api;

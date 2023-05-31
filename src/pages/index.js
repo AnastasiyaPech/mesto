@@ -6,7 +6,7 @@ import UserInfo from "../scripts/components/UserInfo.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import { initialCards, formsConfig } from "../scripts/utils/constants.js";
-import Api from "../scripts/components/Api";
+import api from "../scripts/components/Api.js";
 import PopupWithConfirm from "../scripts/components/PopupWithConfirm.js"
 
 const list = document.querySelector('.list');
@@ -44,8 +44,6 @@ profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
-const api = new Api();
-
 const userInfo = new UserInfo({ userName: profileName, description: profileJob });
 api.getToUserInfo()
     .then((data) => {
@@ -80,12 +78,28 @@ cardsSection.renderItems();
 
 
 function createCard(item) {
-    const card = new Card(item.name, item.link, item.likes.length, item._id, cardTemplateSelector,
+    const card = new Card(item.name, item.link, item.likes, item._id, item.owner._id, cardTemplateSelector,
         (imgName, imgLink) => popupImage.open(imgName, imgLink),
-        popupConfirm, deleteCardConfirmPopup
+        popupConfirm, deleteCardConfirmPopup,
+        () => {
+            const likeStatus = card.checkIsLike(userInfo._id);
+            if (likeStatus !== undefined ) {
+                api.deleteLike(card._cardId)
+                    .then((res) => {
+                        card.toggleLike(res.likes);
+                    })
+            }
+            else {
+                api.putLike(card._cardId)
+                    .then((res) => {
+                        card.toggleLike(res.likes);
+                        card._likeStat = true;
+                    })
+            }
+        },
     );
 
-    const cardElement = card.createCard();
+    const cardElement = card.createCard(userInfo._id);
     return cardElement;
 }
 
@@ -141,7 +155,7 @@ function deleteCardConfirmPopup(card) {
     api.deleteItem(card._cardId)
         .then(() => {
             //сделать чтобы карточка удалялась когда нет ошибок
-            // что возр
+
             card.deleteCard();
         })
 }

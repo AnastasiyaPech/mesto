@@ -12,9 +12,6 @@ export default class PopupWithConfirm extends Popup {
         this._onConfirmFunction = onConfirmFunction;
     }
 
-// open -> write to this._currentCard 
-// submit -> read from this._currentCard
-// close popup -> clear this._currentCard (*)
     setEventListeners() {
         super.setEventListeners();
         this._popupForm.addEventListener('submit', (evt) => {
@@ -25,13 +22,5 @@ export default class PopupWithConfirm extends Popup {
         });
 
     }
-    // setUpOnConfirm(onConfirmFunction){
-    //     this._onConfirmFunction = onConfirmFunction;
-    // }
-
-    // onConfirm() {
-    //     this._onConfirmFunction();
-    // } 
-
-    
+  
 }
