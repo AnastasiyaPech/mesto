@@ -8,7 +8,7 @@ export default class Card {
         this._deleteImageFunction = deleteImageFunction;
         this._countLikes = likes.length;
         this._likes = likes;
-        this._cardId = cardId;
+        this.cardId = cardId;
         this._ownerId = ownerId;
         this._checkLikeFunction = checkLikeFunction;
 
@@ -33,7 +33,7 @@ export default class Card {
         } else {
             this._likeButton.classList.remove('list__button_active');
         }
-         this._checkTrashButton(currentUserId);
+        this._checkTrashButton(currentUserId);
 
         return this._cardElement;
     }
@@ -41,7 +41,10 @@ export default class Card {
     _setEventListeners() {
         this._binButton.addEventListener('click', () => {
             this._deletePopup.open(() => {
-                this._deleteImageFunction(this);
+                this._deleteImageFunction(this)
+                    .finally(() => {
+                        this._deletePopup.close();
+                    })
             });
         })
 
@@ -52,7 +55,6 @@ export default class Card {
             this._handleImageClick();
         })
     };
-
 
     deleteCard() {
         this._cardElement.remove();
@@ -67,7 +69,6 @@ export default class Card {
         this._onClickFunction(this._name, this._link);
     }
 
-
     checkIsLike(currentUserId) {
         const value = this._likes.find((user) => {
             return user._id === currentUserId;
@@ -80,6 +81,4 @@ export default class Card {
             this._binButton.remove();
         }
     };
-
-
 }

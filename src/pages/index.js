@@ -12,26 +12,16 @@ import PopupWithConfirm from "../scripts/components/PopupWithConfirm.js"
 const list = document.querySelector('.list');
 const profilePopupContainer = document.querySelector('.popup_edit-profile');
 const btnOpenProfile = document.querySelector('.profile__button');
-const formProfile = document.querySelector('.popup__form_profile');
 const nameInputForm = document.querySelector('.popup__input_type_firstname');
 const jobInputForm = document.querySelector('.popup__input_type_proffesion');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__text');
-
 const placePopupContainer = document.querySelector('.popup_place');
 const btnOpenPlace = document.querySelector('.profile__add');
-const placeInput = document.querySelector('.popup__input_type_placename');
-const urlInput = document.querySelector('.popup__input_type_url');
-const formPlace = document.querySelector('.popup__form_place');
-const subBtnPlace = document.querySelector('.popup__button-save_place');
-
-const picturePopupContainer = document.querySelector('.popup_picture');
-const cardPicture = document.querySelector('.popup__image');
-const titlePicture = document.querySelector('.popup__picture-text');
 const cardTemplateSelector = document.querySelector('#list-template');
 const btnOpenAvatar = document.querySelector('.profile__image');
-const avatarInputForm = document.querySelector('.popup__input_type_avatar');
 const avatarPopupContainer = document.querySelector('.popup_avatar');
+const btnAvatar = document.querySelector('.profile__image');
 
 btnOpenProfile.addEventListener('click', openProfilePopup);
 btnOpenPlace.addEventListener('click', openPlacePopup);
@@ -44,11 +34,18 @@ profileFormValidator.enableValidation();
 placeFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
-const userInfo = new UserInfo({ userName: profileName, description: profileJob });
-api.getToUserInfo()
-    .then((data) => {
-        userInfo.setUserInfo({ name: data.name, description: data.about, id: data._id });
+const userInfo = new UserInfo({ userName: profileName, description: profileJob, avatar: btnAvatar});
+
+//запрос данных пользователя и получения карточек
+Promise.all([api.getToUserInfo(), api.getInitialCards()])
+    .then(([data, cards]) => {
+        userInfo.setUserInfo({ name: data.name, description: data.about, avatar: data.avatar, id: data._id });
+        cardsSection.renderItems(cards);
     })
+    .catch(err => {
+        console.log(err);
+        throw err;
+    });
 
 const popupImage = new PopupWithImage('.popup_picture');
 popupImage.setEventListeners();
@@ -65,17 +62,10 @@ popupConfirm.setEventListeners();
 const popupAvatar = new PopupWithForm('.popup_avatar', changeAvatarPopup);
 popupAvatar.setEventListeners();
 
-const cardsSection = new Section({
-    items: api.getInitialCards(),
-    renderer: (item) => {
-        const cardElement = createCard(item);
-        list.append(cardElement);
-    },
-},
+const cardsSection = new Section(
+    (item) => { return createCard(item) },
     list,
 );
-cardsSection.renderItems();
-
 
 function createCard(item) {
     const card = new Card(item.name, item.link, item.likes, item._id, item.owner._id, cardTemplateSelector,
@@ -83,17 +73,24 @@ function createCard(item) {
         popupConfirm, deleteCardConfirmPopup,
         () => {
             const likeStatus = card.checkIsLike(userInfo._id);
-            if (likeStatus !== undefined ) {
-                api.deleteLike(card._cardId)
+            if (likeStatus !== undefined) {
+                api.deleteLike(card.cardId)
                     .then((res) => {
                         card.toggleLike(res.likes);
                     })
+                    .catch((err) => {
+                        console.log(err);
+                        throw err;
+                    })
             }
             else {
-                api.putLike(card._cardId)
+                api.putLike(card.cardId)
                     .then((res) => {
                         card.toggleLike(res.likes);
-                        card._likeStat = true;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        throw err;
                     })
             }
         },
@@ -112,7 +109,10 @@ function addCard(data) {
         .then((res) => {
             const cardElement = createCard(res);
             cardsSection.addItem(cardElement);
-
+        })
+        .catch((err) => {
+            console.log(err);
+            throw err;
         })
 }
 
@@ -134,7 +134,7 @@ function openPlacePopup() {
 
 function openAvatarPopup() {
     avatarFormValidator.cleanErrors();
-    placeFormValidator.blockSubBtn();
+    avatarFormValidator.blockSubBtn();
     popupAvatar.open();
 }
 
@@ -146,17 +146,23 @@ function submitEditProfileForm(data) {
     }
     return api.changeUserInfo(value)
         .then((res) => {
-            userInfo.setUserInfo({ name: res.name, description: res.about });
+            userInfo.setUserInfo({ name: res.name, description: res.about, avatar: res.avatar, id: res._id });
+        })
+        .catch((err) => {
+            console.log(err);
+            throw err;
         })
 }
 
 //функция удаления карточки через попап
 function deleteCardConfirmPopup(card) {
-    api.deleteItem(card._cardId)
+    return api.deleteItem(card.cardId)
         .then(() => {
-            //сделать чтобы карточка удалялась когда нет ошибок
-
             card.deleteCard();
+        })
+        .catch((err) => {
+            console.log(err);
+            throw err;
         })
 }
 
@@ -167,12 +173,29 @@ function changeAvatarPopup(data) {
     }
     return api.changeAvatarImage(value)
         .then((res) => {
-            btnOpenAvatar.style.backgroundImage = "url(" + res.avatar + ")";
+         userInfo.setUserInfo({ name: res.name, description: res.about, avatar: res.avatar, id: res._id});
+        })
+        .catch((err) => {
+            console.log(err);
+            throw err;
         })
 }
 
 
+function main(res){
+    let btn = ododsfsdfkjop;
+    not_main(res.name, res.about, res.avatar, btn);
+    
+    
+}
 
-
+function not_main(name,about,avatar, btn){
+    console.log(name);
+    console.log(about);
+    console.log(avatar);
+    btn.style.backgroundImage = "url(" + avatar + ")";
+    
+}
+ 
 
 

@@ -3,19 +3,21 @@ class Api {
         this._baseUrl = baseUrl;
         this._headers = headers;
     }
+//метод проверяет ответ от сервера
+    _checkResponse(res) {
+            if (res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка: ${res.status}`);
+            }
+    }
 
     // получение всех карточек в виде массива
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
             })
@@ -31,13 +33,7 @@ class Api {
             }),
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
             })
@@ -49,31 +45,19 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
                 throw err;
             })
     };
 
-    // загрузка информации о ползователе с сервера
+    // загрузка информации о пользователе с сервера
     getToUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
                 throw err;
@@ -91,13 +75,7 @@ class Api {
             }),
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
                 throw err;
@@ -113,13 +91,7 @@ class Api {
             }),
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
                 throw err;
@@ -132,13 +104,7 @@ class Api {
             method: 'PUT',
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
                 throw err;
@@ -152,22 +118,12 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
                 throw err;
 
             })
-    }
-    //получение инфы для первоначальной отрисовки карточки
-    getAllData(){
-        return Promise.all([this.getInitialCards(), this.getToUserInfo()])
     }
 
 }

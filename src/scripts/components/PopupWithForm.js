@@ -4,7 +4,7 @@ export default class PopupWithForm extends Popup {
     constructor(popupSelector, handleFormSubmit) {
         super(popupSelector);
         this._handleFormSubmit = handleFormSubmit;
-        this._popupForm = this._popup1.querySelector('.popup__form');
+        this._popupForm = this._popup.querySelector('.popup__form');
         this._inputList = this._popupForm.querySelectorAll('.popup__input');
         this._subBtnSave = this._popupForm.querySelector('.popup__button-save');
         this._usualBtnText = this._subBtnSave.textContent;
@@ -28,6 +28,9 @@ export default class PopupWithForm extends Popup {
                 .then(() => {
                     this.close();
                 })
+                .finally(() => {
+                    this._subBtnSave.textContent = this._usualBtnText;  
+                  }); 
         });
 
     }
@@ -35,6 +38,5 @@ export default class PopupWithForm extends Popup {
     close() {
         super.close();
         this._popupForm.reset();
-        this._subBtnSave.textContent = this._usualBtnText;
     }
 }

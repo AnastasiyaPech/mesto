@@ -1,20 +1,19 @@
 export default class Section {
-    constructor({ items, renderer }, selector) {
-        this._items = items;
+    constructor(renderer, dataList) {
         this._renderer = renderer;
-        this._selector = selector;
+        this._dataList = dataList;
     }
-    renderItems() {
-        this._items
-            .then((items) => {
-                items.forEach((item) => {
-                    this._renderer(item);
-                });
-            })
-    }
+ 
+    renderItems(items) {
+        items.forEach((item) => {
+          const renderedItem = this._renderer(item);
+          this._dataList.append(renderedItem);
+        });
+       
+      }
 
     addItem(element) {
-        this._selector.prepend(element);
+        this._dataList.prepend(element);
     }
 
 }
