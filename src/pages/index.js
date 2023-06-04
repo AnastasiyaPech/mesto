@@ -44,7 +44,6 @@ Promise.all([api.getToUserInfo(), api.getInitialCards()])
     })
     .catch(err => {
         console.log(err);
-        throw err;
     });
 
 const popupImage = new PopupWithImage('.popup_picture');
@@ -80,7 +79,6 @@ function createCard(item) {
                     })
                     .catch((err) => {
                         console.log(err);
-                        throw err;
                     })
             }
             else {
@@ -90,7 +88,6 @@ function createCard(item) {
                     })
                     .catch((err) => {
                         console.log(err);
-                        throw err;
                     })
             }
         },
@@ -112,7 +109,6 @@ function addCard(data) {
         })
         .catch((err) => {
             console.log(err);
-            throw err;
         })
 }
 
@@ -150,7 +146,6 @@ function submitEditProfileForm(data) {
         })
         .catch((err) => {
             console.log(err);
-            throw err;
         })
 }
 
@@ -162,7 +157,6 @@ function deleteCardConfirmPopup(card) {
         })
         .catch((err) => {
             console.log(err);
-            throw err;
         })
 }
 
@@ -177,25 +171,8 @@ function changeAvatarPopup(data) {
         })
         .catch((err) => {
             console.log(err);
-            throw err;
+        
         })
 }
-
-
-function main(res){
-    let btn = ododsfsdfkjop;
-    not_main(res.name, res.about, res.avatar, btn);
-    
-    
-}
-
-function not_main(name,about,avatar, btn){
-    console.log(name);
-    console.log(about);
-    console.log(avatar);
-    btn.style.backgroundImage = "url(" + avatar + ")";
-    
-}
- 
 
 

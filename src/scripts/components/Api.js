@@ -18,9 +18,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     };
 
     // добавление новой карточки на страницу
@@ -34,9 +31,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     };
 
     //удаление карточки
@@ -46,10 +40,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-            })
     };
 
     // загрузка информации о пользователе с сервера
@@ -58,10 +48,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-            })
     };
 
     // редактирование профиля пользователя
@@ -76,10 +62,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-            })
     };
 
     //смена аватара
@@ -92,10 +74,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-            })
     };
 
     //постановка лайка
@@ -105,11 +83,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-
-            })
     }
 
     //удаление лайка
@@ -119,11 +92,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-                throw err;
-
-            })
     }
 
 }

@@ -3,10 +3,12 @@
     height: 120px;
     border-radius: 100%;
     margin-right: 30px;
+    padding: 0;
     object-fit: cover;
     box-sizing: border-box;
     background-image: url(../../../images/avatar.jpg);
     background-repeat: no-repeat;
+    background-size: cover;
     background-color: transparent;
     cursor: pointer;
     background-position: center;
